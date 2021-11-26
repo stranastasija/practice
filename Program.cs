@@ -1,9 +1,12 @@
 ﻿// Практикум 24.11 игра "Угадай загаданное число"
 
+Console.Clear();
+Console.WriteLine("Привет! Давай сыграем в игру? Сейчас компьютер загадает число, а твоя задача будет угадать его. :) ");
+
 
 int ComputerNumber ()
 {
-    Console.WriteLine("Супер! Игра началась. Давай обозначим диапазон для числа. Назови минимальное число: ");
+    Console.WriteLine("Давай обозначим диапазон для числа. Назови минимальное число: ");
     string minNumber = Console.ReadLine();
     int min = Convert.ToInt32(minNumber);
     Console.WriteLine("А теперь максимальное число: ");
@@ -12,15 +15,16 @@ int ComputerNumber ()
     int number = new Random().Next (min, max+1);
     return number;
 }
-
+//Console.WriteLine(ComputerNumber());
 
 int Count ()
 {
-    Console.WriteLine("Число загадано. Сколько попыток тебе понадобится, чтобы угадать его? Введи это число: ");
+    Console.WriteLine("Игра началась и число загадано. Сколько попыток тебе понадобится, чтобы угадать его?");
     string num = Console.ReadLine();
     int count = Convert.ToInt32(num);
     return count;
 }
+//Console.WriteLine(Count());
 
 int UserNumber()
 {
@@ -29,27 +33,30 @@ int UserNumber()
     
     do
     {
-        Console.WriteLine("Игра началась. Введи число, которое загадал компьютер:");
+        Console.WriteLine("Как думаешь, какое число загадал компьютер? Введи его:");
         player = Console.ReadLine()!;
         number = (String.IsNullOrEmpty(player)) || !(Int32.TryParse(player, out int outnumber));
+        break;
     }
+
     while (number);
     return Convert.ToInt32(player);
 }
+//Console.WriteLine(UserNumber());
 
-bool Game ()
-{
-    int player = UserNumber();
-    int Computer = ComputerNumber();
-    int count = Count();
-    bool result = false;
-
+//bool Game ()
+//{
+    
+//    bool result = false;
+        int player = UserNumber();
+        int Computer = ComputerNumber();
+        int count = Count();
     do
     {
+        
         if (player == Computer)
         {
             Console.WriteLine("Поздравляю! Ты угадал число!");
-            result = true;
         }
         else 
         {
@@ -70,15 +77,32 @@ bool Game ()
     {
         Console.WriteLine("К сожалению, тебе не удалось угадать загаданное число. Не расстраивайся, попробуй сыграть еще раз!");
     }
-    return true;
+//    return true;
+//}
+//Console.WriteLine(Game());
+
+
+//Проверка кода
+
+int CreateNumber (int min, int max)   //написанный код
+{
+    return new Random().Next (min, max+1);
 }
 
+// 1 вариант
 
+Console.WriteLine(CreateNumber(4,10));
 
+// 2 вариант
 
-Console.Clear();
-Console.WriteLine("Привет! Давай сыграем в игру? Сейчас компьютер загадает число, а твоя задача будет угадать его. :) ");
-Console.WriteLine(ComputerNumber());
-Console.WriteLine(Count());
-Console.WriteLine(UserNumber());
-Console.WriteLine(Game());
+int min = 4;
+int max = 10;
+int result = CreateNumber(min, max);
+if (result>min && result<=max)
+{
+    Console.WriteLine("good");
+}
+else
+{
+    Console.WriteLine("error");
+}
